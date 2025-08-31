@@ -1,0 +1,135 @@
+:root{
+  --bg: #0f1724;
+  --card-bg: linear-gradient(180deg,#1e293b,#071029);
+  --accent: #06b6d4;
+  --card-front: #eef2ff;
+  --text: #e6eef7;
+  --muted: #9fb0c7;
+  --shadow: 0 6px 18px rgba(2,6,23,0.6);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: radial-gradient(circle at 10% 10%, #071029 0%, #041018 45%, #001018 100%);
+  color:var(--text);
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Topbar */
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 20px;
+  gap:12px;
+  border-bottom:1px solid rgba(255,255,255,0.03);
+}
+.topbar h1{margin:0;font-size:18px;letter-spacing:0.4px}
+.controls{display:flex;align-items:center;gap:10px}
+select,button{
+  background:linear-gradient(180deg,#0b1320,#061826);
+  border:1px solid rgba(255,255,255,0.06);
+  color:var(--text);
+  padding:8px 10px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:14px;
+}
+button:hover,select:hover{transform:translateY(-1px)}
+button:active{transform:translateY(0)}
+#newGameBtn{padding:8px 12px}
+
+/* Game area */
+.game-area{padding:18px;flex:1;display:flex;flex-direction:column;align-items:center;gap:18px}
+.status{display:flex;gap:18px;align-items:center}
+.stat{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:8px 12px;border-radius:10px;text-align:center;min-width:90px;box-shadow:var(--shadow)}
+.stat strong{display:block;font-size:12px;color:var(--muted)}
+.stat div{font-size:18px;margin-top:6px}
+
+/* Board */
+.board{
+  width:100%;
+  max-width:920px;
+  display:grid;
+  gap:12px;
+  padding:6px;
+  justify-items:center;
+  align-items:center;
+}
+
+/* card */
+.card{
+  width:100%;
+  height:0;
+  padding-bottom:100%;
+  max-width:110px;
+  position:relative;
+  perspective:1000px;
+  cursor:pointer;
+}
+.card-inner{
+  position:absolute;inset:0;transition:transform .5s;transform-style:preserve-3d;border-radius:10px;
+}
+.card.flipped .card-inner{transform:rotateY(180deg)}
+.card-face{
+  position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;justify-content:center;
+  backface-visibility:hidden;box-shadow:var(--shadow);overflow:hidden;
+}
+.card-front{
+  background:var(--card-front);color:#0b1220;font-size:36px;transform:rotateY(180deg);
+  display:flex;align-items:center;justify-content:center;font-weight:700;
+}
+.card-back{
+  background:var(--card-bg);color:var(--text);font-size:20px;
+  display:flex;align-items:center;justify-content:center;
+}
+.card.matched{opacity:.6;transform:scale(.98);cursor:default}
+
+/* modal */
+.modal{
+  position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);z-index:50;
+}
+.modal.hidden{display:none}
+.modal-content{
+  background:linear-gradient(180deg,#031122,#0b2330);padding:22px;border-radius:12px;min-width:280px;color:var(--text);box-shadow:var(--shadow);
+  text-align:center;
+}
+.modal-stats{display:flex;gap:18px;justify-content:center;margin:14px 0}
+.modal-actions{display:flex;gap:10px;justify-content:center}
+.modal button{min-width:110px}
+
+/* footer */
+.footer{padding:12px;text-align:center;font-size:13px;color:var(--muted);border-top:1px solid rgba(255,255,255,0.02)}
+
+/* responsive grid sizes (cards per row adapt to chosen board) */
+@media (min-width:320px){
+  .board.size-6{grid-template-columns:repeat(3,1fr)}
+  .board.size-8{grid-template-columns:repeat(4,1fr)}
+  .board.size-10{grid-template-columns:repeat(5,1fr)}
+  .board.size-12{grid-template-columns:repeat(6,1fr)}
+  .board.size-14{grid-template-columns:repeat(7,1fr)}
+  .board.size-15{grid-template-columns:repeat(5,1fr)}
+  .board.size-18{grid-template-columns:repeat(6,1fr)}
+}
+@media (min-width:900px){
+  .board.size-6{grid-template-columns:repeat(6,1fr)}
+  .board.size-8{grid-template-columns:repeat(8,1fr)}
+  .board.size-10{grid-template-columns:repeat(10,1fr)}
+  .board.size-12{grid-template-columns:repeat(12,1fr)}
+  .board.size-14{grid-template-columns:repeat(14,1fr)}
+  .board.size-15{grid-template-columns:repeat(15,1fr)}
+  .board.size-18{grid-template-columns:repeat(18,1fr)}
+}
+
+/* small screens: reduce card max size */
+@media (max-width:420px){
+  .card{max-width:78px}
+  .stat{min-width:70px;font-size:13px}
+}

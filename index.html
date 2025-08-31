@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Memory Game</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Memory Card Game</h1>
+    <div class="controls">
+      <label for="sizeSelect">Board size:</label>
+      <select id="sizeSelect" aria-label="Board size">
+        <!-- Pairs: 6 => 12 cards, 8 => 16 cards, ... 18 => 36 cards -->
+        <option value="6">12 cards (6 pairs)</option>
+        <option value="8" selected>16 cards (8 pairs)</option>
+        <option value="10">20 cards (10 pairs)</option>
+        <option value="12">24 cards (12 pairs)</option>
+        <option value="14">28 cards (14 pairs)</option>
+        <option value="15">30 cards (15 pairs)</option>
+        <option value="18">36 cards (18 pairs)</option>
+      </select>
+
+      <button id="newGameBtn">New Game</button>
+    </div>
+  </header>
+
+  <main class="game-area">
+    <section class="status">
+      <div class="stat"><strong>Moves</strong><div id="moves">0</div></div>
+      <div class="stat"><strong>Time</strong><div id="timer">00:00</div></div>
+      <div class="stat"><strong>Pairs</strong><div id="pairsFound">0 / 8</div></div>
+    </section>
+
+    <section id="board" class="board" aria-live="polite"></section>
+  </main>
+
+  <!-- Finished modal -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <h2>Congratulations!</h2>
+      <p id="modalText">You finished the game.</p>
+      <div class="modal-stats">
+        <div>Moves: <span id="finalMoves">0</span></div>
+        <div>Time: <span id="finalTime">00:00</span></div>
+      </div>
+      <div class="modal-actions">
+        <button id="playAgainBtn">Play Again</button>
+        <button id="closeModalBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">Made by Aditya ❤️</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
